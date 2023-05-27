@@ -1,0 +1,59 @@
+<!-- Add Department Modal -->
+<div style="margin: 10%; margin-left: 30%">
+  <h1 style="margin: 10%; margin-left: 30%" class="modal-title">
+    Registration
+  </h1>
+
+  <div class="modal-body">
+    <form (ngSubmit)="addRegister()" [formGroup]="registrationForm">
+      <div class="form-group">
+        <label>Username<span class="text-danger">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="username/email"
+          [class.invalid]="registrationForm.get('userName')"
+          formControlName="userName"
+        />
+        <div [hidden]="errorshow">
+          <span style="color: red">email or username is not valid</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mobile<span class="text-danger">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="mobile no."
+          [class.invalid]="registrationForm.get('mobile')"
+          formControlName="mobile"
+        />
+      </div>
+      <div class="form-group">
+        <label>Password<span class="text-danger">*</span></label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="password"
+          [class.invalid]="registrationForm.get('password')"
+          formControlName="password"
+        />
+      </div>
+      <div class="submit-section">
+        <button
+          style="margin: 3%; margin-left: 40%"
+          class="btn btn-primary submit-btn"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+    <h4>
+      Already have an account ?
+      <span routerLink="/login" class="text-primary" style="cursor: pointer">
+        Login here
+      </span>
+    </h4>
+  </div>
+</div>

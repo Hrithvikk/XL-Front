@@ -1,0 +1,105 @@
+<app-login *ngIf="dataValue == '0'; else song"></app-login>
+
+<ng-template #song>
+  <h1>Audio List</h1>
+  <!-- /////////// -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Image</th>
+        <th scope="col">Play</th>
+        <th scope="col">Pause</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <th scope="row"></th>
+        <td>{{ file.name }}</td>
+        <td>{{ file.description }}</td>
+        <td>
+          <img
+            src="http://localhost:8443\{{ file.image }}"
+            style="height: 50px; width: 50px"
+            class="avtar"
+            alt="Img"
+          />
+        </td>
+        <td>
+          <button (click)="fileplay(file)"><i class="fa fa-play"></i></button>
+        </td>
+        <td>
+          <button (click)="pause()"><i class="fa fa-pause"></i></button>
+        </td>
+        <td>
+          <button (click)="deleteSong(file)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+        <td>
+          <button (click)="editSong(file)"><i class="fa fa-pencil"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-left: 30%" [hidden]="showaddButton">
+    <div>
+      <h1>Add new song</h1>
+    </div>
+    <form [formGroup]="addForm" (ngSubmit)="addsong()">
+      <input
+        type="text"
+        placeholder="Song title"
+        formControlName="name"
+      /><br /><br />
+      <textarea
+        type="text"
+        placeholder="Description"
+        formControlName="desc"
+      ></textarea
+      ><br /><br />
+      <input type="file" (change)="selectImage($event)" /><i
+        class="fa fa-file"
+      ></i>
+      <br /><br />
+      <input type="file" (change)="selectFile($event)" /><i
+        class="fa fa-music"
+      ></i
+      ><br /><br />
+      <button type="submit" class="btn btn-primary">Add Song</button>
+      <button [hidden]="showUpdateButton" type="submit" class="btn btn-primary">
+        Update
+      </button>
+    </form>
+  </div>
+  <div style="margin-left: 30%" [hidden]="showUpdateButton">
+    <div>
+      <h1>Update Song</h1>
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="updateSong()">
+      <input
+        type="text"
+        placeholder="Song title"
+        formControlName="editname"
+      /><br /><br />
+      <textarea
+        type="text"
+        placeholder="Description"
+        formControlName="editdesc"
+      ></textarea
+      ><br /><br />
+      <input type="file" (change)="selectImage($event)" />
+      <i class="fa fa-file"></i><br /><br />
+      <input type="file" (change)="selectFile($event)" /><i
+        class="fa fa-music"
+      ></i
+      ><br /><br />
+
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</ng-template>
